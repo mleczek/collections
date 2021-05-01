@@ -1,0 +1,41 @@
+{
+    "name": "mleczek/collections",
+    "description": "Easy way to manipulate arrays in PHP.",
+    "type": "library",
+    "keywords": [
+    	"array",
+    	"manipulate",
+    	"collection"
+    ],
+    "homepage": "https://github.com/mleczek/collections",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wojciech Mleczek",
+            "email": "mleczek.wojtek@gmail.com"
+        }
+    ],
+    "scripts": {
+        "tests": "phpunit"
+    },
+    "require": {
+        "php": "~7.4 || ~8.0",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "files": [
+            "helpers.php"
+        ],
+        "psr-4": {
+            "Mleczek\\Collections\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mleczek\\Collections\\Tests\\": "tests/"
+        }
+    }
+}
