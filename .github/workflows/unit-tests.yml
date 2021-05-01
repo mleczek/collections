@@ -1,0 +1,27 @@
+name: Unit Tests
+on: push
+
+jobs:
+    verify-code:
+        name: PHPUnit
+        runs-on: ${{ matrix.os }}
+
+        strategy:
+            matrix:
+                os: ['ubuntu-20.04']
+                php: ['7.4', '8.0']
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+
+            - name: Install dependencies
+              run: composer install --no-progress
+
+            - name: Test (phpunit)
+              run: composer run tests
