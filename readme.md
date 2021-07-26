@@ -86,7 +86,7 @@ $sum = collection([1, 2, 5])
 Add item at the beginning of the collection.
 
 ```php
-$collection = collection([2, 3])->addFirst(1);
+$collection = collection([2, 3])->addFirst(1); // [1, 2, 3]
 ```
 
 ### addLast
@@ -94,7 +94,7 @@ $collection = collection([2, 3])->addFirst(1);
 Add item at the end of the collection.
 
 ```php
-$collection = collection([2, 3])->addLast(4);
+$collection = collection([2, 3])->addLast(4); // [2, 3, 4]
 ```
 
 ### avg
@@ -102,7 +102,7 @@ $collection = collection([2, 3])->addLast(4);
 Calculate average value from items. Zero if there're no items in collection.
 
 ```php
-$avg = collection([1, 2, 6])->avg();
+$avg = collection([1, 2, 6])->avg(); // 3
 ``` 
 
 ```php
@@ -112,7 +112,7 @@ $items = [
 ];
 
 $avg = collection($items)
-    ->avg(fn($item, $key) => $item['value']);
+    ->avg(fn($item, $key) => $item['value']); // 5
 ```
 
 Throws when trying to calculate avg from non-number value.
@@ -124,7 +124,7 @@ Breaks into multiple, smaller collections of a given size.
 E.g. for chunk size 2 the output array for `[1, 2, 3]` will be `[[1, 2], [3]]`.
 
 ```php
-$collection = collection([1, 2, 3])->chunk(2);
+$collection = collection([1, 2, 3])->chunk(2); // [[1, 2], [3]]
 ```
 
 ### count
@@ -132,7 +132,7 @@ $collection = collection([1, 2, 3])->chunk(2);
 The total number of items in the collection.
 
 ```php
-$count = collection([1, 2])->count();
+$count = collection([1, 2])->count(); // 2
 ```
 
 ### each
@@ -149,7 +149,7 @@ collection(['a' => 1, 'b' => 2])
 Get first item key.
 
 ```php
-$key = collection(['a' => 1, 'b' => 2])->firstKey();
+$key = collection(['a' => 1, 'b' => 2])->firstKey(); // 'a'
 ```
 
 ### first
@@ -157,17 +157,15 @@ $key = collection(['a' => 1, 'b' => 2])->firstKey();
 Get first item value.
 
 ```php
-$item = collection(['a' => 1, 'b' => 2])->first();
+$item = collection(['a' => 1, 'b' => 2])->first(); // 1
 ```
 
 ### flatten
 
 Convert array of arrays to array (remove one dimension).
 
-E.g. Flattening the `[[1, 2], [3]]` array will output `[1, 2, 3]`.
-
 ```php
-$collection = collection([[1, 2], [3]])->flatten();
+$collection = collection([[1, 2], [3]])->flatten(); // [1, 2, 3]
 ```
 
 ### groupBy
@@ -182,7 +180,7 @@ $items = [
 ];
 
 $collection = collection($items)
-    ->groupBy(fn($item, $key) => $item['brand']);
+    ->groupBy(fn($item, $key) => $item['brand']); // ['Jeep' => [...], 'Nissan' => [...]]
 ```
 
 ### has
@@ -191,7 +189,7 @@ Check whether collection has items which match given closure.
 
 ```php
 $test = collection([2, 7, 3])
-    ->has(fn($item, $key) => $item === 7);
+    ->has(fn($item, $key) => $item === 7); // true
 ```
 
 ### isAssociative
@@ -199,7 +197,8 @@ $test = collection([2, 7, 3])
 Check whether collection is an associative array.
 
 ```php
-$test = collection(['a' => 1, 4])->isAssociative();
+$test = collection([1, 4])->isAssociative(); // false
+$test = collection(['a' => 1, 4])->isAssociative(); // true
 ```
 
 See also [`isIndexed`](#isIndexed) method.
@@ -209,7 +208,7 @@ See also [`isIndexed`](#isIndexed) method.
 Check whether collection has zero items.
 
 ```php
-$test = collection([])->isEmpty();
+$test = collection([])->isEmpty(); // true
 ```
 
 ### isIndexed
@@ -217,7 +216,8 @@ $test = collection([])->isEmpty();
 Check whether collection is an indexed array.
 
 ```php
-$test = collection(['a' => 1, 4])->isIndexed();
+$test = collection([1, 4])->isIndexed(); // true
+$test = collection(['a' => 1, 4])->isIndexed(); // false
 ```
 
 See also [`isAssociative`](#isAssociative) method.
@@ -227,7 +227,7 @@ See also [`isAssociative`](#isAssociative) method.
 Check whether collection has any item.
 
 ```php
-$test = collection([8, 2])->isNotEmpty();
+$test = collection([8, 2])->isNotEmpty(); // true
 ```
 
 ### join
@@ -235,7 +235,7 @@ $test = collection([8, 2])->isNotEmpty();
 Join all items with given glue.
 
 ```php
-$string = collection(['Nissan', 'Jeep', 'Ford'])->join(', ');
+$string = collection(['Nissan', 'Jeep', 'Ford'])->join(', '); // 'Nissan, Jeep, Ford'
 ```
 
 ### keyBy
@@ -250,7 +250,7 @@ $items = [
 ];
 
 $collection = collection($items)
-    ->keyBy(fn($item, $key) => $item['id']);
+    ->keyBy(fn($item, $key) => $item['id']); // [5 => [...], 1 => [...], 4 => [...]]
 ```
 
 If multiple items have the same key, the exception will be thrown.
@@ -260,7 +260,7 @@ If multiple items have the same key, the exception will be thrown.
 Returns all of the collection's keys.
 
 ```php
-$array = collection(['a' => 1, 'b' => 3])->keys();
+$array = collection(['a' => 1, 'b' => 3])->keys(); // ['a', 'b']
 ```
 
 ### lastKey
@@ -268,7 +268,7 @@ $array = collection(['a' => 1, 'b' => 3])->keys();
 Get last item key.
  
  ```php
-$key = collection(['a' => 1, 'b' => 2])->lastKey();
+$key = collection(['a' => 1, 'b' => 2])->lastKey(); // 'b'
  ```
 
 ### last
@@ -276,7 +276,7 @@ $key = collection(['a' => 1, 'b' => 2])->lastKey();
 Get last item value.
  
  ```php
-$item = collection(['a' => 1, 'b' => 2])->last();
+$item = collection(['a' => 1, 'b' => 2])->last(); // 2
  ```
 
 ### map
@@ -285,7 +285,7 @@ Iterates through the collection and modify each item.
 
 ```php
 $collection = collection([1, 4])
-    ->map(fn($item, $key) => $item * 2);
+    ->map(fn($item, $key) => $item * 2); // [2, 8]
 ```
 
 Array keys are preserved.
@@ -297,17 +297,17 @@ Get maximum value from items.
 The ">" operator is used to find maximum value.
 
 ```php
-$max = collection([1, 4, 7])->max();
+$max = collection([1, 4, 7])->max(); // 7
 ```
 
 ```php
 $items = [
     ['value' => 3],
-    ['value' => 7],
+    ['value' => 8],
 ];
 
 $avg = collection($items)
-    ->max(fn($item, $key) => $item['value']);
+    ->max(fn($item, $key) => $item['value']); // 8
 ```
 
 ### merge
@@ -318,14 +318,14 @@ In associative arrays values for existing keys will be overwrite.
 In indexed arrays new values are always appended at the end of collection.
 
 ```php
-$collection = collection([1, 2])->merge([3, 4]);
+$collection = collection([1, 2])->merge([3, 4]); // [1, 2, 3, 4]
 ```
 
 ```php
 $first = collection([1, 2]);
 $second = collection(['a' => 1, 'b' => 2]);
 
-$collection = $first->merge($second);
+$collection = $first->merge($second);// [1, 2, 'a' => 1, 'b' => 2]
 ```
 
 ### min
@@ -335,17 +335,17 @@ Get minimum value from items.
 The "<" operator is used to find minimum value.
 
 ```php
-$max = collection([1, 4, 7])->min();
+$max = collection([1, 4, 7])->min(); // 1
 ```
 
 ```php
 $items = [
     ['value' => 3],
-    ['value' => 7],
+    ['value' => 8],
 ];
 
 $avg = collection($items)
-    ->min(fn($item, $key) => $item['value']);
+    ->min(fn($item, $key) => $item['value']); // 3
 ```
 
 ### randomKey
@@ -375,7 +375,7 @@ Reduces the collection to a single value, passing the result of each iteration i
 ```php
 $initialState = 2;
 $result = collection([1, 8, 4])
-    ->reduce(fn($item, $state) => $state + $item, $initialState);
+    ->reduce(fn($item, $state) => $state + $item, $initialState); // 15
 ```
 
 ### removeFirst
@@ -383,8 +383,8 @@ $result = collection([1, 8, 4])
 Remove first N items from collection.
 
 ```php
-$collection = collection([1, 8, 4])->removeFirst();
-$collection = collection([1, 8, 4])->removeFirst(2);
+$collection = collection([1, 8, 4])->removeFirst(); // [8, 4]
+$collection = collection([1, 8, 4])->removeFirst(2); // [4]
 ```
 
 ### removeLast
@@ -392,8 +392,8 @@ $collection = collection([1, 8, 4])->removeFirst(2);
 Remove last N items from collection.
 
 ```php
-$collection = collection([1, 8, 4])->removeLast();
-$collection = collection([1, 8, 4])->removeLast(2);
+$collection = collection([1, 8, 4])->removeLast(); // [1, 8]
+$collection = collection([1, 8, 4])->removeLast(2); // [1]
 ```
 
 ### reverse
@@ -401,7 +401,7 @@ $collection = collection([1, 8, 4])->removeLast(2);
 Reverse items order.
 
 ```php
-$collection = collection([1, 8, 4])->reverse();
+$collection = collection([1, 8, 4])->reverse(); // [4, 8, 1]
 ```
 
 ### skip
@@ -409,8 +409,8 @@ $collection = collection([1, 8, 4])->reverse();
 Skip N first items.
 
 ```php
-$collection = collection([1, 8, 4])->skip();
-$collection = collection([1, 8, 4])->skip(2);
+$collection = collection([1, 8, 4])->skip(); // [8, 4]
+$collection = collection([1, 8, 4])->skip(2); // [4]
 ```
 
 ### sortDesc
@@ -420,7 +420,7 @@ Sort items descending.
 Strings are sorted in case insensitive manner.
 
 ```php
-$collection = collection([1, 8, 4])->sortDesc();
+$collection = collection([1, 8, 4])->sortDesc(); // [8, 4, 1]
 ```
 
 ```php
@@ -430,7 +430,7 @@ $items = [
 ];
 
 $collection = collection($items)
-    ->sortDesc(fn($item) => $item['value']);
+    ->sortDesc(fn($item) => $item['value']); // ['value' => 7, 'value' => 3]
 ```
 
 See also [`sort`](#sort) method.
@@ -442,7 +442,7 @@ Sort items ascending.
 Strings are sorted in case insensitive manner.
 
 ```php
-$collection = collection([1, 8, 4])->sort();
+$collection = collection([1, 8, 4])->sort(); // [1, 4, 8]
 ```
 
 ```php
@@ -452,7 +452,7 @@ $items = [
 ];
 
 $collection = collection($items)
-    ->sort(fn($item) => $item['value']);
+    ->sort(fn($item) => $item['value']); // ['value' => 3, 'value' => 7]
 ```
 
 See also [`sortDesc`](#sortDesc) method.
@@ -462,7 +462,7 @@ See also [`sortDesc`](#sortDesc) method.
 Returns the sum of all items in the collection.
 
 ```php
-$sum = collection([1, 2, 6])->sum();
+$sum = collection([1, 2, 6])->sum(); // 9
 ``` 
 
 ```php
@@ -472,7 +472,7 @@ $items = [
 ];
 
 $sum = collection($items)
-    ->sum(fn($item, $key) => $item['value']);
+    ->sum(fn($item, $key) => $item['value']); // 10
 ```
 
 Throws when trying to calculate sum from non-number value.
@@ -482,8 +482,8 @@ Throws when trying to calculate sum from non-number value.
 Take N first items.
 
 ```php
-$collection = collection([1, 8, 4])->take();
-$collection = collection([1, 8, 4])->take(2);
+$collection = collection([1, 8, 4])->take(); // [1]
+$collection = collection([1, 8, 4])->take(2); // [1, 8]
 ```
 
 ### toArray
@@ -491,7 +491,7 @@ $collection = collection([1, 8, 4])->take(2);
 Returns collection's items.
 
 ```php
-$array = collection([6, 3, 1])->toArray();
+$array = collection([6, 3, 1])->toArray(); // [6, 3, 1]
 ```
 
 ### unique
@@ -499,7 +499,7 @@ $array = collection([6, 3, 1])->toArray();
 Left only items with unique value.
 
 ```php
-$collection = collection([6, 1, 3, 1])->unique();
+$collection = collection([6, 1, 3, 1])->unique(); // [6, 1, 3]
 ```
 
 First occurrence is taken if multiple same values are encountered.
@@ -520,7 +520,7 @@ $collection = collection([$items])
 Returns all of the collection's values (as indexed array).
 
 ```php
-$values = collection(['a' => 1, 'b' => 2])->values();
+$values = collection(['a' => 1, 'b' => 2])->values(); // [1, 2]
 ```
 
 ### whereIn
@@ -529,7 +529,7 @@ Return collection with items that needle is in haystack of accepted values.
 
 ```php
 $collection = collection([8, 4, 2])
-    ->whereIn(fn($item, $key) => $item, [4, 7, 2]);
+    ->whereIn(fn($item, $key) => $item, [4, 7, 2]); // [4, 2]
 ```
 
 ### where
@@ -538,5 +538,5 @@ Return collection with items which match given criteria.
 
 ```php
 $collection = collection([8, 4, 2])
-    ->where(fn($item, $key) => $item > 3);
+    ->where(fn($item, $key) => $item > 3); // [8, 4]
 ```
